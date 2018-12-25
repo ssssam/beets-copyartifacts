@@ -122,7 +122,7 @@ class CopyArtifactsPlugin(BeetsPlugin):
         }])
         self._dirs_seen.extend([source_path])
 
-    def process_events(self):
+    def process_events(self, lib):
         for item in self._process_queue:
             self.process_artifacts(item['files'], item['mapping'], False)
 
