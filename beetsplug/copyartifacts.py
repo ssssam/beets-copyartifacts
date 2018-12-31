@@ -50,8 +50,7 @@ class CopyArtifactsPlugin(BeetsPlugin):
                 break
         else:
             # No query matched; use original filename
-            file_path = os.path.join(mapping['albumpath'],
-                                     beets.util.displayable_path(filename))
+            file_path = os.path.join(mapping['albumpath'].encode('utf-8'), filename)
             return file_path
 
         if isinstance(path_format, Template):
