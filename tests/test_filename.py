@@ -1,7 +1,7 @@
 import os
 import sys
 
-from tests.helper import CopyArtifactsTestCase
+from tests.helper import CopyArtifactsTestCase, capture_log
 import beets
 from beets import config
 
@@ -54,3 +54,16 @@ class CopyArtifactsFilename(CopyArtifactsTestCase):
 
         self.assert_in_lib_dir(b'Tag Artist', b'Tag Album_', b'Tag Artist - Tag Album_.file')
 
+    def test_import_dir_with_format_string_character_in_filename(self):
+        # Create import directory, use some Python format string characters in
+        # the name. This should catch issues in message logging.
+        test_filename = b'albumart{0}.%s.file'
+
+        open(os.path.join(self.album_path, beets.util.bytestring_path(test_filename)), 'a').close()
+        medium = self._create_medium(os.path.join(self.album_path, b'track_1.mp3'), b'full.mp3')
+        self.import_media = [medium]
+
+        with capture_log() as logs:
+            self._run_importer()
+
+        self.assert_in_lib_dir(b'Tag Artist', b'Tag Album', test_filename)
