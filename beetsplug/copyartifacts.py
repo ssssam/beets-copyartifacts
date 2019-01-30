@@ -182,7 +182,7 @@ class CopyArtifactsPlugin(BeetsPlugin):
                 self._log.warning('   {0}', os.path.basename(f))
 
     def _copy_artifact(self, source_file, dest_file):
-        self._log.info(u'Copying artifact: {0}'.format(os.path.basename(dest_file.decode('utf8'))))
+        self._log.info(u'Copying artifact: {0}', os.path.basename(dest_file.decode('utf8')))
         beets.util.copy(source_file, dest_file)
 
     def _move_artifact(self, source_file, dest_file):
@@ -190,7 +190,7 @@ class CopyArtifactsPlugin(BeetsPlugin):
             # Sanity check for other plugins moving files
             return
 
-        self._log.info(u'Moving artifact: {0}'.format(os.path.basename(dest_file.decode('utf8'))))
+        self._log.info(u'Moving artifact: {0}', os.path.basename(dest_file.decode('utf8')))
         beets.util.move(source_file, dest_file)
 
         dir_path = os.path.split(source_file)[0]

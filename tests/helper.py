@@ -217,10 +217,10 @@ class CopyArtifactsTestCase(_common.TestCase):
         for root, dirs, files in os.walk(path):
             level = root.replace(path, '').count(os.sep)
             indent = u' ' * 4 * (level)
-            log.debug(u'{}{}/'.format(indent, os.path.basename(root)))
+            log.debug(u'{}{}/', indent, os.path.basename(root))
             subindent = u' ' * 4 * (level + 1)
             for f in files:
-                log.debug(u'{}{}'.format(subindent, f))
+                log.debug(u'{}{}', subindent, f)
 
     def assert_in_lib_dir(self, *segments):
         """
